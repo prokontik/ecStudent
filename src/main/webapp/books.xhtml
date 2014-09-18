@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui" 
+       xmlns:pe="http://primefaces.org/ui/extensions">
+         
+<!--<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui" 
+      xmlns:pe="http://primefaces.org/ui/extensions" 
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      >-->
+ 
+<!--    
+            <h:head>
+<title>Dashboard</title>
+    </h:head>   
+    -->
+    <f:view contentType="text/html" locale="sr_BA">
+   <pe:head title="Unysys 5+ -- Biblioteka spisak" >
+                  <style type="text/css">
+                .ui-layout-north {
+                    z-index:20 !important;
+                    overflow:visible !important;;
+                }
+
+                .ui-layout-north .ui-layout-unit-content {
+                    overflow:visible !important;
+                }
+            </style>
+    </pe:head>
+    <h:body>
+        
+         <h:outputStylesheet id="layoutCSS">  
+    body {  
+        margin: 4px;  
+    }  
+</h:outputStylesheet> 
+        
+         <pe:layout resizerTip="Resize Me" togglerTipClosed="Open Me" togglerTipOpen="Close Me">  
+                    <pe:layoutPane position="north" size="60" closable="false"  >  
+
+
+            
+            
+
+
+<h:form id="m">  
+    <p:growl id="mess" showDetail="true"    />
+    <div  style="width:100%">
+    <div style="width:250px;float:left">
+        <img src="resources/images/logo.png" alt="Univerzitet za poslovne studije" height="50"  />
+    </div>
+    <div style="float:left;width:calc(100% - 250px)">
+        <p:toolbar>
+        <f:facet name="left">
+<!--            <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical"  />
+            </span>
+                
+             <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical"  />
+            </span>-->
+            <!--<p:graphicImage value="resources/images/logo.png" title="Univerzitet za poslovne studije"  height="35" width="150" style="padding:0" />-->
+            <p:commandButton type="button" value="          UNISYSS 5+                         Biblioteka   D A S H B O A R D     "  icon="ui-icon-document" />
+<!--            <p:commandButton type="button" value="New" icon="ui-icon-document" />
+            <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+            <img src="../resources/LogoUPSznak.jpg" alt=""/>-->
+ 
+<span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+            </span>
+
+    
+ 
+<!--    <p:commandButton type="button"   title="Save" icon="ui-icon-disk" />
+            <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
+            <p:commandButton type="button" title="Print" icon="ui-icon-print" />
+        </f:facet>
+        
+                <f:facet name="right">
+            
+            <p:commandButton type="button" value="New" icon="ui-icon-document" />
+            <p:commandButton type="button" value="New" icon="ui-icon-document" />
+ 
+            <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+ 
+ 
+
+
+    
+ 
+            <p:commandButton type="button" title="Save" icon="ui-icon-disk" />
+            <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
+            <p:commandButton type="button" title="Print" icon="ui-icon-print" />-->
+        </f:facet>
+        
+                <f:facet name="right" >
+                    <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+            </span>
+                        <p:menuButton value="Student:   #{loginBean.imePrezime} " >
+                   <p:menuitem value="Logout" action="#{loginBean.logout}"  update ="mess"  ajax="false" icon="ui-icon-close" />
+<!--                   <p:menuitem value="Save" actionListener="#{menuView.save}" update="mess" icon="ui-icon-disk" />            
+                   <p:menuitem value="Profil" update=":dial:studentDetail" oncomplete="PF('studentDialog').show()" icon="ui-icon-close" ajax="true" />-->
+                <!--<p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink" />-->
+            </p:menuButton>
+        </f:facet>
+
+        
+    </p:toolbar>
+        </div>
+        </div>
+    
+
+</h:form>
+
+
+
+
+
+        </pe:layoutPane> 
+    <pe:layoutPane position="west"  resizable="true" size="300" minSize="100" maxSize="400">
+        West
+    </pe:layoutPane>
+ 
+    <pe:layoutPane position="center">
+        Center
+    </pe:layoutPane>
+         </pe:layout>
+    </h:body>
+    </f:view>  
+</html>
+

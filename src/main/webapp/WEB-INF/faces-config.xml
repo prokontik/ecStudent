@@ -1,0 +1,51 @@
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+        http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+    
+         <application>
+     	   <locale-config>
+ <default-locale>sr_BA</default-locale>
+    <supported-locale>en_US</supported-locale>
+     	   </locale-config>
+           
+           <application>
+   <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+    <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+    <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+</application>
+           
+           
+     </application> 
+ <navigation-rule>
+        
+     <from-view-id>/ecStudent/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+            <from-outcome>dashboard</from-outcome>
+            <to-view-id>/ecStudent/dashboard.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>profesor</from-outcome>
+            <to-view-id>/ecStudent/profesor.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>books</from-outcome>
+            <to-view-id>/ecStudent/books.xhtml</to-view-id>
+        </navigation-case>
+                <navigation-case>
+            <from-outcome>cv</from-outcome>
+            <to-view-id>/ecStudent/cv.xhtml</to-view-id>
+        </navigation-case>   
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/ecStudent/login.xhtml</to-view-id>
+        </navigation-case>
+     
+    </navigation-rule>
+</faces-config>

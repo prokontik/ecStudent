@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui" 
+       xmlns:pe="http://primefaces.org/ui/extensions">
+         
+<!--<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui" 
+      xmlns:pe="http://primefaces.org/ui/extensions" 
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      >-->
+ 
+<!--    
+            <h:head>
+<title>Dashboard</title>
+    </h:head>   
+    -->
+  <f:view contentType="text/html" locale="sr_BA">  
+   <pe:head title="Unysys 5+ -- Student dashboard" >
+<!--        <f:facet name="first">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta http-equiv="pragma" content="no-cache"/>
+            <meta http-equiv="cache-control" content="no-cache"/>
+            <meta http-equiv="expires" content="0"/>
+        </f:facet>-->
+ 
+   
+       
+                  <style type="text/css">
+                .ui-layout-north {
+                    z-index:20 !important;
+                    overflow:visible !important;;
+                }
+
+                .ui-layout-north .ui-layout-unit-content {
+                    overflow:visible !important;
+                }
+            </style>
+
+<!--         <style type="text/css">
+        .ui-widget,.ui-widget .ui-widget {
+            font-size: 90% !important;
+        }
+    </style> -->
+    
+    
+     <style type="text/css">
+ .ui-accordion .ui-accordion-content {
+         padding: 5px;
+     }
+     
+ .blue.ui-datatable .ui-datatable-even{
+background: lightsalmon ;
+ }
+.blue.ui-datatable .ui-datatable-odd{
+background:  lightsalmon ;
+}  
+
+.highlightTableRow {
+   background-color: #E0EEEE !important;
+      font-weight: bold;
+}
+/*     .ui-tabs-left{
+         width:200px;*/
+     /*}*/
+ </style>
+    
+<!--         <h:outputStylesheet library="css" name="global.css"/> 
+     
+
+-->
+
+       <script name="jquery/jquery.js" library="primefaces"></script>
+       <script>
+	            function onTabChange(panel){
+                       
+//	                
+	                alert(PF('acc.activeIndex'));
+//                        PF('statusDialog').show();
+                       
+
+//                        PF('rc').execute();
+                        rc();
+	            }
+	 
+	            function onTabShow(panel){
+//	                alert('Client Callback : After Tab Been changed');
+//                        PF('statusDialog').hide();
+                        
+	            }
+	        </script>
+
+
+   </pe:head>
+    
+
+    <h:body>   
+ <h:outputStylesheet id="layoutCSS">  
+    body {  
+        margin: 4px;  
+    }  
+</h:outputStylesheet> 
+
+        
+<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+  <!--<img src="resources/images/ajaxloadingbar.gif" alt=""/>-->
+    <img src="resources/images/ajax-loader-2.gif" alt=""/>
+</p:dialog>
+     
+
+
+    <h:form id ="dial" >
+    <p:dialog header="Student Info" widgetVar="studentDialog"  modal="true"    showEffect="fade" hideEffect="fade"    closable="true" resizable="false">
+        <p:outputPanel   id="studentDetail" style="text-align:center;">
+            <p:panelGrid  columns="2"  columnClasses="label,value">
+ 
+                <h:outputText value="Tema:" />
+ <p:themeSwitcher id="advanced" style="width:165px" effect="fade" var="t">
+            <f:selectItem itemLabel="Choose Theme" itemValue="" />
+            <f:selectItems value="[afterdark, afternoon, afterwork, aristo, black-tie, blitzer, bluesky, bootstrap, casablanca, cupertino, cruze, dark-hive, delta, dot-luv, eggplant, excite-bike, flick, glass-x, home, hot-sneaks, humanity, le-frog, metroui, midnight, mint-choc, overcast, pepper-grinder, redmond, rocket, sam, smoothness, south-street, start, sunny, swanky-purse, trontastic, ui-darkness, ui-lightness, vader]" var="theme" itemLabel="" itemValue="" />
+ 
+            <p:column>
+                <h:outputText styleClass="ui-theme ui-theme-" style="display-block" />
+            </p:column>
+ 
+            <p:column>
+                 
+            </p:column>
+        </p:themeSwitcher>
+ 
+                <h:outputText value="Stara šifra" />
+                <h:outputText value="" />
+ 
+                <h:outputText value="Nova šifra:" />
+                <h:outputText value="" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+    </h:form>
+
+
+<!--<img src="resources/images/ajaxloadingbar.gif" alt=""/>-->
+<!--<h:form>-->  
+<!--<h:form>-->
+ <!--<h:form id="dash">-->  
+    <pe:layout resizerTip="Resize Me" togglerTipClosed="Open Me" togglerTipOpen="Close Me">  
+ 
+     <!--<p:growl id="mess" showDetail="true" />-->
+        <pe:layoutPane position="north" size="60" closable="false"  >  
+
+
+            
+            
+
+
+<h:form id="m">  
+    <p:growl id="mess" showDetail="true"    />
+    <div  style="width:100%">
+    <div style="width:250px;float:left">
+        <img src="resources/images/logo.png" alt="Univerzitet za poslovne studije" height="50"  />
+    </div>
+    <div style="float:left;width:calc(100% - 250px)">
+        <p:toolbar>
+        <f:facet name="left">
+<!--            <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical"  />
+            </span>
+                
+             <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical"  />
+            </span>-->
+            <!--<p:graphicImage value="resources/images/logo.png" title="Univerzitet za poslovne studije"  height="35" width="150" style="padding:0" />-->
+            <p:commandButton type="button" value="          UNISYSS 5+                          Student   D A S H B O A R D     "  icon="ui-icon-document" />
+<!--            <p:commandButton type="button" value="New" icon="ui-icon-document" />
+            <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+            <img src="../resources/LogoUPSznak.jpg" alt=""/>-->
+ 
+<span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+            </span>
+
+    
+ 
+<!--    <p:commandButton type="button"   title="Save" icon="ui-icon-disk" />
+            <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
+            <p:commandButton type="button" title="Print" icon="ui-icon-print" />
+        </f:facet>
+        
+                <f:facet name="right">
+            
+            <p:commandButton type="button" value="New" icon="ui-icon-document" />
+            <p:commandButton type="button" value="New" icon="ui-icon-document" />
+ 
+            <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+ 
+ 
+
+
+    
+ 
+            <p:commandButton type="button" title="Save" icon="ui-icon-disk" />
+            <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
+            <p:commandButton type="button" title="Print" icon="ui-icon-print" />-->
+        </f:facet>
+        
+                <f:facet name="right" >
+                    <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+            </span>
+                        <p:menuButton value="Student:   #{loginBean.imePrezime} " >
+                   <p:menuitem value="Logout" action="#{loginBean.logout}"  update ="mess"  ajax="false" icon="ui-icon-close" />
+                   <p:menuitem value="Save" actionListener="#{menuView.save}" update="mess" icon="ui-icon-disk" />            
+                   <p:menuitem value="Profil" update=":dial:studentDetail" oncomplete="PF('studentDialog').show()" icon="ui-icon-close" ajax="true" />
+                <!--<p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink" />-->
+            </p:menuButton>
+        </f:facet>
+
+        
+    </p:toolbar>
+        </div>
+        </div>
+    
+
+</h:form>
+
+
+
+
+
+        </pe:layoutPane>  
+    <pe:layoutPane position="west" size="250" maxWidth="100%">  
+            <!--<pe:layoutPane position="north" size="33%">-->  
+<!--                West-North  
+                <p:panelGrid   columns="2">
+    <f:facet name="header">
+        <p:graphicImage name="demo/images/misc/kobe.png" />
+    </f:facet>
+ 
+    <h:outputText value="Name:" />
+    <h:outputText value="Kobe Bryant" />
+ 
+    <h:outputText value="Team:" />
+    <h:outputText value="Los Angeles Lakers" />
+ 
+    <h:outputText value="Position:" />
+    <h:outputText value="Shooting Guard" />
+ 
+    <h:outputText value="Number:" />
+    <h:outputText value="24" />
+</p:panelGrid>-->
+<!--      <h:form id="form">          -->
+<!--<p:carousel  vertical="true" value="#{studentBean.students}" headerText="Student" var="student" itemStyleClass="single" >-->
+<p:dataGrid  value="#{studentBean.getStudents(loginBean.userGUID)}" var="student"  columns="1">
+        <!--<p:tab title="Student">-->
+        <p:panel header="Student" style="margin-bottom:1px">
+            <h:panelGrid columns="1" cellpadding="2" >
+<!--                <f:facet name="header">
+                    <p:graphicImage name="demo/images/car/#{car.brand}-big.gif" />
+                </f:facet>                    -->
+<!--                <h:outputText value="Ime:" style="font-weight: bold" />-->
+                <h:outputText value="#{student.ime}" style="font-weight: bold"/>
+                   <h:outputText value="#{student.imeoca}" />
+                      <h:outputText value="#{student.prezime}" style="font-weight: bold"/>
+                      <h:outputText value="JMBG: #{student.jmbg}"/>
+                      <h:outputText value="#{student.adresa}" />
+                      <h:outputText value="#{student.zip.concat(' ').concat(student.grad)}" />
+                      
+ 
+<!--                <h:outputText value="Year:" style="font-weight: bold" />
+                <h:outputText value="#{car.year}" />
+ 
+                <h:outputText value="Color:" style="font-weight: bold" />
+                <h:outputText value="#{car.color}" />-->
+            </h:panelGrid>
+             </p:panel>
+<!--        <f:facet name="footer">
+<img src="../resources/LogoUPSznak.jpg" alt=""/>
+                Ukupno 2 studenata.
+        </f:facet>-->
+        <!--</p:tab>-->
+    </p:dataGrid>
+
+
+<!--<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+<img src="resources/images/logo.png" alt="Univerzitet za poslovne studije" height="50"  />
+</p:dialog>-->
+
+
+
+
+<!--<ui:repeat value="#{studentBean.getIndexs(loginBean.userGUID)}" var="o">
+    <p:accordionPanel widgetVar="accordion_index">
+        <p:tab title="Title 1 #{o.brojindeksa}">
+            #{o.brojindeksa}
+        </p:tab>
+    </p:accordionPanel>
+</ui:repeat>-->
+
+
+
+
+ <h:form id ="indid" >     
+<!--     <p:remoteCommand name="rc" update=":upissss:upissemestar" actionListener="#{studentBean.onIndexChange(index.indexid)}" />
+    <p:growl id="msgsindx" showDetail="true" />
+    <p:accordionPanel id="indx" value="#{studentBean.getIndexs(loginBean.userGUID)}" var="index1"   widgetVar="acc" onTabShow="onTabShow(panel)" onTabChange="onTabChange(panel)">   
+    <p:ajax event="tabChange" listener="#{studentBean.onIndexChange('97')}" update=":upissss:upissemestar"/>
+  
+     <p:ajax event="tabChange" listener="#{accordionPanel.changeListener}"></p:ajax>
+    <p:tab   id="#{loginBean.randomId}"  title="INDEX: #{index1.brojindeksa.concat(' Plan:').concat(index1.studijskiprogramsifra)}" titleStyle="font-weight: bold; padding:5" >
+            <h:panelGrid columns="1" cellpadding="2" style="width:95%; height: 95%"  >
+                <f:facet name="header">
+                    <p:graphicImage name="demo/images/car/#{car.brand}-big.gif" />
+                </f:facet>                    
+                <h:outputText value="Ime:" style="font-weight: bold" />
+                <h:outputText value="#{index1.faklutetnaziv}" style="font-weight: normal"/>
+                <h:outputText value="#{index1.studijskiprogramnaziv}" style="font-weight: normal"/>
+                <h:outputText value="#{index1.brojindeksa}" style="font-weight: bolder"/>
+                <h:outputText value="#{index1.studijskiprogramsifra}" />
+                      
+        
+            </h:panelGrid>
+        <f:facet name="footer">
+                Ukupno 2 studenata.
+        </f:facet>
+        </p:tab>
+</p:accordionPanel>-->
+
+
+            
+
+    <p:dataGrid columns="1" value="#{studentBean.getIndexs(loginBean.userGUID)}" var="index"    >
+        <f:facet name="header">
+           Studijski programi - indexi
+        </f:facet>
+        
+       
+                  
+
+        
+        
+        <p:commandButton    ajax="true" value="#{index.studijskiprogramnaziv.concat(' - ').concat(index.brojindeksa)}"  id="brojindeksa" update=":upissss:upissemestar, :upissss:rasisp"   actionListener="#{studentBean.onIndexChange(index.indexid)}"  style="font-weight: normal;"   styleClass="ui-priority-primary" />
+     <!--<h:outputText id="out11" value="#{studentBean.currentindexbroj}" />-->
+   <!--<h:outputText id="display" value="#{index.brojindeksa}" />-->
+     </p:dataGrid >
+   
+ 
+<!--     <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <h:outputText value="Platform:" />
+        <p:selectOneButton value="##{studentBean.getIndexs(loginBean.userGUID)}">
+            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+        </p:selectOneButton>
+ 
+        <p:commandButton value="Submit" update="displaon-check" />y" icon="ui-ic
+        <p:spacer />
+ 
+        <h:outputText value="Selected:" />
+        <h:outputText id="display" value="#{selectOneView.option}" style="font-weight: bold" />
+    </h:panelGrid>-->
+ 
+ 
+</h:form>         
+    
+<!--<h:form>
+    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <h:outputText value="Platform:" />
+        <p:selectOneButton value="#{studentBean.getIndexs(loginBean.userGUID)}" var="index">
+            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+        </p:selectOneButton>
+ 
+        <p:commandButton value="Submit" update="display" icon="ui-icon-check" />
+        <p:spacer />
+ 
+        <h:outputText value="Selected:" />
+        <h:outputText id="display" value="#{selectOneView.option}" style="font-weight: bold" />
+    </h:panelGrid>
+</h:form>-->
+
+
+            <!--</pe:layoutPane>-->  
+<!--            <pe:layoutPane position="center" minHeight="60">  
+<p:accordionPanel value="#{studentBean.students}" var="student" >   
+              
+</p:accordionPanel>
+            </pe:layoutPane>  
+            <pe:layoutPane position="south" size="33%" initClosed="true">  
+                West-South  
+
+            </pe:layoutPane>  -->
+        </pe:layoutPane>  
+     <pe:layoutPane  position="center">  
+            <pe:layoutPane position="north" size="20%">  
+                <f:facet name="header" >  
+                    <h:outputText value="Vijesti..."/>  
+               
+                </f:facet>  
+            </pe:layoutPane>  
+         
+            <h:form id ="upissss">     
+            <pe:layoutPane position="center" minHeight="60" >  
+               
+                <f:facet name="header">  
+                        
+                    <h:outputText value="Semestri"/>  
+
+                </f:facet>  
+ 
+
+
+       <p:growl id="predmet1" showDetail="true" />
+<!--                     <p:dialog modal="true" widgetVar="statusDialog1" header="Status" draggable="false" >
+         <img src="resources/images/logo.png" alt="Univerzitet za poslovne studije" height="50"  />
+     </p:dialog>
+      <p:ajaxStatus onstart="statusDialog1.show();" oncomplete="statusDialog1.hide();"/>       -->
+
+                     
+                     
+<p:accordionPanel  id ="upissemestar" value="#{studentBean.getUpisSemestar(loginBean.indexID)}" var="upis2"    dynamic="true"  cache="true">   
+    <!--<p:ajax event="tabChange" listener="#{studentBean.onTabChange}" update=":indid"/>-->
+                         <p:tab  title="INDEX: #{upis2.indexbroj.concat('      ').concat(upis2.semestar)}" titleStyle="font-weight: bold; padding:5">
+
+                             <!--<p:dataTable  var="predmet" value="#{studentBean.getPredmetSemestar(upis2.upisid)}" selectionMode="single" selection="#{studentBean.selectedPredmet}" rowKey="#{predmet.id}"  rowStyleClass="#{predmet.ocjena gt 5 ? 'highlightTableRow' : null }">-->
+ 
+       <!--<p:dataTable  var="predmet" value="#{studentBean.getPredmetSemestar(upis2.upisid)}" rowStyleClass="#{predmet.ocjena gt 5 ? 'highlightTableRow' : null }">-->
+                             
+    <p:dataTable   var="predmet" value="#{predmetBean.getPredmetSemestar(upis2.upisid)}" selectionMode="single" selection="#{predmetBean.selectedPredmet}"  rowKey="#{predmet.id}"    rowStyleClass="#{predmet.ocjena gt 5 ? 'highlightTableRow' : null } ">
+        <p:ajax event="rowSelect"    listener="#{predmetBean.onRowSelect}" update=":upissss:rasisp"  />
+        <p:ajax event="rowUnselect" listener="#{studentBean.onRowUnselect}" update=":upissss:rasisp" />
+    
+        
+        <p:column headerText="ID" width="50">
+        <h:outputText value="#{predmet.id}"  />
+    </p:column>
+      
+   <p:column headerText="Sifra" width="100">
+        <h:outputText value="#{predmet.sifrapredmeta}"  />
+    </p:column>
+ 
+    <p:column headerText="Naziv predmeta">
+        <h:outputText value="#{predmet.predmet}" />
+    </p:column>
+ 
+    <p:column headerText="Ocjena" width="70">
+        <h:outputText value="#{predmet.ocjena}"   style="text-align: center"/>
+    </p:column>
+ 
+    <p:column headerText="Profesor" width="350">
+        <h:outputText value="#{predmet.profesor}" />
+    </p:column>
+        
+    <p:column headerText="Položio" width="200">
+        <h:outputText value="#{predmet.datumpolozio}">
+  <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+</h:outputText>
+    </p:column>  
+    <p:column headerText="Status" width="100">
+        <h:outputText value="Status to do" />
+        <!--<p:commandButton value="#{predmet.id}" id="prijava#{predmet.id}" update=":finansijeForm" ajax="true" actionListener="#{studentBean.onRedSelect(predmet.id)}" styleClass="ui-priority-primary" />-->    
+    </p:column>
+        
+</p:dataTable>
+                         
+                             
+                             <!--            <h:panelGrid columns="1" cellpadding="2" style="width:95%; height: 95%"  >
+                <f:facet name="header">
+                    <p:graphicImage name="demo/images/car/#{car.brand}-big.gif" />
+                </f:facet>                    
+                <h:outputText value="Ime:" style="font-weight: bold" />
+                <h:outputText value="#{index.faklutetnaziv}" style="font-weight: normal"/>
+                <h:outputText value="#{upis2.studijskiprogramnaziv}" style="font-weight: normal"/>
+                <h:outputText value="#{index.brojindeksa}" style="font-weight: bolder"/>
+                <h:outputText value="#{index.studijskiprogramsifra}" />
+                      
+        
+            </h:panelGrid>-->
+        </p:tab>
+</p:accordionPanel>              
+ <!--</h:form>-->
+                
+<!--                    <p:tabView orientation="left" >
+                        <p:tab title="Godfather Part I" >
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                <h:outputText
+                    value="The story begins as Don Vito Corleone..." />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part II" >
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather2.jpg" />
+                <h:outputText value="Francis Ford Coppola's legendary..." />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part III" >
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                <h:outputText value="After a break of more than 15 years..." />
+            </h:panelGrid>
+        </p:tab>
+    </p:tabView>-->
+                
+                
+                         </pe:layoutPane>     
+           <pe:layoutPane position="south" size="20%" initClosed="false">  
+                              <f:facet name="header" >  
+                        
+                    <h:outputText value="Raspored ispita za izabrani predmet"/>  
+
+                </f:facet>  
+               
+  <!--<h:form id ="ispiti">-->
+      <p:dataTable  id="rasisp" var="raspored" value="#{predmetBean.rasporedIspita}" >
+                                 
+<!--        <p:ajax event="rowSelect"    listener="#{studentBean.onRowSelect}" update=":upissss:predmet1"  />
+        <p:ajax event="rowUnselect" listener="#{studentBean.onRowUnselect}" update=":upissss:predmet1" />-->
+    
+        
+        <p:column headerText="ID" width="40">
+            <h:outputText value="#{raspored.id}"  />
+    </p:column>
+      
+              <p:column headerText="Ispitni rok" width="150">
+                  <h:outputText value="#{raspored.ispitniroknaziv}"   style="text-align: center"/>
+    </p:column>
+   <p:column headerText="Sifra" width="80">
+        <h:outputText value="#{raspored.sifrapredmeta}"  />
+    </p:column>
+ 
+    <p:column headerText="Naziv predmeta">
+        <h:outputText value="#{raspored.predmet}" />
+    </p:column>
+ 
+
+ 
+    <p:column headerText="Profesor" width="250">
+        <h:outputText value="#{raspored.profesor}" />
+    </p:column>
+        
+    <p:column headerText="Od" width="100">
+        <h:outputText value="#{raspored.datumod}">
+  <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+</h:outputText>
+  </p:column>
+          
+ <p:column headerText="Do" width="100">
+ <h:outputText value="#{raspored.datumdo}">
+  <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+</h:outputText>
+  </p:column>
+          
+          
+    <p:column headerText="Prijava" width="100">
+        <h:outputText value="Prijava to do" />
+        <!--<p:commandButton value="#{predmet.id}" id="prijava#{predmet.id}" update=":finansijeForm" ajax="true" actionListener="#{studentBean.onRedSelect(predmet.id)}" styleClass="ui-priority-primary" />-->    
+    </p:column>
+          
+</p:dataTable>
+     
+               
+               
+            </pe:layoutPane>  
+</h:form>  
+<!--                <h:form id ="dash">  
+                     <p:commandButton action="#{loginBean.logout}" value="Logout"  update ="dash"  ajax="true"></p:commandButton>
+                     </h:form> -->
+
+        </pe:layoutPane>  
+ 
+        <pe:layoutPane position="east" size="250" resizeWhileDragging="true">  
+         
+            <h:form id="finansijeForm">
+                        
+               <p:panel header="Finansijska kartica">
+ 
+                <!--<h:panelGrid id="finansije" columns="1">-->
+ 
+                <h:outputText value="Trenutni saldo:"  style="text-align:center; width:100%"/>
+<!--       <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-horizontal"  />
+            </span>-->
+ <p:separator />
+                <div style="text-align: right; width:100%">
+                    <!--<h:outputText value="#{studentBean.getFinsaldo(loginBean.userGUID)} KM" style="font-weight: bold; width:100%"  />-->
+                    
+                    
+                          <h:outputText value="#{studentBean.getFinsaldo(loginBean.userGUID)}" style="font-weight: bold; width:100%">
+                              <f:convertNumber type="number"   pattern="#,##0.00 KM"/>
+             </h:outputText>
+                    
+                    </div>
+           
+               <p:separator />
+<!--                    <p:message for="username" ></p:message>
+ 
+                    <h:outputText value="Password" />
+ 
+                    <p:password id="password" value="#{loginBean.password}"  feedback="false"></p:password>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:message for="password"></p:message>
+ 
+                    <p:spacer></p:spacer>
+ -->
+<!--  <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-horizontal"  />
+            </span>-->
+
+<p:commandButton    value="Kartica izvještaj"  action="#{studentBean.finKartice}"  oncomplete="window.open('#{studentBean.finKartice}','_blank');"  immediate="true"></p:commandButton>
+<!--<p:commandLink value="Kartica izvještaj"   action="#{studentBean.finKartice}" immediate="true" >-->
+
+<!--</p:commandLink>-->
+
+                <!--</h:panelGrid>-->
+ 
+            </p:panel>
+         </h:form>
+            
+            <h:form id="knjige">  
+            <p:panel header="Biblioteka">
+                "Zaduzene knjige 4 kom"
+                <p:commandButton    value="Knjige izvještaj"   action="books?faces-redirect=true"  immediate="true"></p:commandButton>
+                
+            </p:panel>
+            </h:form>
+            
+            
+        </pe:layoutPane>  
+        <pe:layoutPane position="south" size="40">  
+           Unisyss 5+  © EastCode d.o.o.  2014
+        </pe:layoutPane>  
+    </pe:layout>  
+
+   <!--</h:form>--> 
+
+</h:body>
+    </f:view>
+</html>
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+          xmlns:pe="http://primefaces.org/ui/extensions">
+     
+    <pe:head>
+        <title>CV</title>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+        
+               <style type="text/css">
+                .ui-layout-north {
+                    z-index:20 !important;
+                    overflow:visible !important;;
+                }
+
+                .ui-layout-north .ui-layout-unit-content {
+                    overflow:visible !important;
+                }
+            </style>
+        
+        
+    </pe:head>
+     
+    <h:body>
+            <h:form id="formcvedit" >     
+    <pe:layout style="min-width:100px;min-height:200px;" fullPage="true">
+
+<!--    <pe:layoutPane position="west" resizable="true" size="10" minSize="10" maxSize="200">
+        West
+     
+    </pe:layoutPane>-->
+ 
+        <pe:layoutPane position="center"  >
+            <!--<p:tabView value="#{profesorBean.profcv}" var="profcv"  id="tcv" >-->
+            <p:tabView dynamic="true"   id="tcv"   orientation="left"   >
+                <p:tab   id="obr" title="Obrazovanje -Pregled zvaničnog obrazovanja"  titleStyle="font-size:12px" >
+                <!--<h:panelGrid columns="1" cellpadding="10"  >-->
+            <p:editor id="editor" widgetVar="editorWidget" value="#{profesorBean.profcv.obrazovanje}"  width="700"  height="645"/>
+                  
+              <!--</h:panelGrid>-->  
+        </p:tab>
+                <p:tab  id="ri" title="Radno iskustvo"  titleStyle="font-size:12px">
+            <p:editor id="editor1" widgetVar="editorWidget" value="#{profesorBean.profcv.radnoIskustvo}"  width="700"  height="645"/>
+        </p:tab>
+        <p:tab title="Nastavni rad" titleStyle="font-size:12px">
+            <p:editor id="editor3" widgetVar="editorWidget" value="#{profesorBean.profcv.nastRad}"  width="700"  height="645"/>
+        </p:tab>
+                <p:tab title="Članstvo u stručnim i naučnim asocijacijama" titleStyle="font-size:12px">
+                    <p:editor id="editor4" widgetVar="editorWidget" value="#{profesorBean.profcv.clanStrucNaucAso}"  width="700"  height="645"/>
+        </p:tab>
+                    <p:tab title="Naučni rad - Monografije, posebna poglavlja u naučnim knjigama" titleStyle="font-size:12px">
+                        <p:editor id="editor5" widgetVar="editorWidget" value="#{profesorBean.profcv.nastRadMonograf}"  width="700"  height="645"/>
+        </p:tab>
+                    <p:tab title="Naučni rad - Naučni članci u naučnom časopisu" titleStyle="font-size:12px">
+                        <p:editor id="editor6" widgetVar="editorWidget" value="#{profesorBean.profcv.nastRadClanciCaso}"  width="700"  height="645"/>
+        </p:tab>
+                    <p:tab title="Naučni rad - Naučni članci u zborniku međunarodnog naučnog skupa" titleStyle="font-size:12px">
+                        <p:editor id="editor7" widgetVar="editorWidget" value="#{profesorBean.profcv.nastRadClanciZborn}"  width="700"  height="645"/>
+        </p:tab>
+                    <p:tab title="Naučni rad - Naučni članci u zborniku nacionalnog naučnog skupa" titleStyle="font-size:12px">
+                        <p:editor id="editor8" widgetVar="editorWidget" value="#{profesorBean.profcv.nastRadClanciZbornNacioSkup}"  width="700"  height="645"/>
+        </p:tab>
+                <p:tab title="Udžbenici (autori, godina izdanja, naslov, grad, izdavač)" titleStyle="font-size:12px">
+                           
+                    <p:editor id="editor10" widgetVar="editorWidget" value="#{profesorBean.profcv.udzbenici}"  width="700"  height="645"/>
+        </p:tab>
+                
+         <p:tab title="Naučni projekti i naučne studije" titleStyle="font-size:12px">
+             <p:editor id="editor11" widgetVar="editorWidget" value="#{profesorBean.profcv.naucProjekStudi}"  width="700"  height="645"/>
+        </p:tab>
+         <p:tab title="Maternji jezik i ostali jezici" titleStyle="font-size:12px">
+             <p:editor id="editor12" widgetVar="editorWidget" value="#{profesorBean.profcv.jezici}"  width="700"  height="645"/>
+        </p:tab>
+                                    <p:tab title="Organizacione sposobnosti: Koordinacija i upravljanje ljudima, projektima i budžetom" titleStyle="font-size:12px">
+                                        <p:editor id="editor13" widgetVar="editorWidget" value="#{profesorBean.profcv.orgSposobn}"  width="700"  height="645"/>
+        </p:tab>
+                                    <p:tab title="Tehničke sposobnosti: Poznavanje rada na kompjuteru, specifičnoj opremi, mašinama" titleStyle="font-size:12px">
+                                        <p:editor id="editor14" widgetVar="editorWidget" value="#{profesorBean.profcv.tehSposobn}"  width="700"  height="645"/>
+        </p:tab>
+                                    <p:tab title="Nagrade i priznanja" titleStyle="font-size:12px">
+                                        <p:editor id="editor15" widgetVar="editorWidget" value="#{profesorBean.profcv.nagradePriznanja}"  width="700"  height="645"/>
+        </p:tab>
+                                    <p:tab title="Dodatne informacije" titleStyle="font-size:12px">
+                                        <p:editor id="editor16" widgetVar="editorWidget" value="#{profesorBean.profcv.dodatInfor}"  width="700"  height="645"/>
+        </p:tab>
+                
+                
+                
+            
+ </p:tabView>
+<!-- <f:facet name="right">
+       <p:commandButton  value="Snimi" icon="ui-icon-extlink"    actionListener="#{profesorBean.saveCv()}" />
+       <h:panelGrid columns="1" cellpadding="10"  >
+           <p:button outcome="productDetail" value="With Icon" icon="ui-icon-star">
+    <f:param name="productId" value="20" />
+</p:button>
+        <p:commandButton value="With Icon" id="withIcon" icon="ui-icon-disk" />
+          </h:panelGrid>  
+             <p:commandButton  value="Snismi" icon="ui-icon-extlink"     />
+    </f:facet>-->
+            
+    </pe:layoutPane>
+     <pe:layoutPane position="south" resizable="false" size="75" minSize="75" maxSize="200">
+   <!--<f:facet name="right">-->
+   <p:panel >
+       Unesite podatke za CV za svaki tab pojedinačno             -->
+        <p:commandButton id="addMsgButton" value="Snimi podatke" action="#{profesorBean.saveCv()}"  
+                       
+                         style="margin-top: 5px;" icon="ui-icon-save"  />  
+</p:panel>
+   <!--</f:facet>-->
+    </pe:layoutPane>  
+
+</pe:layout>
+                        </h:form>  
+    </h:body>
+     
+</html>
+
